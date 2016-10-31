@@ -11,11 +11,14 @@ mip-39ad 用来支持39.net相关页面的客户广告显示
 
 在MIP HTML中,直接使用标签, 用于正常显示直投的广告。示例如下:
 ```
-<mip-39ad asid="3002"></mip-39ad>
+<div id="AdWapAskOnlineFloat">
+<mip-39ad asid="3002" hide-layer-id="AdWapAskOnlineFloat" ></mip-39ad>
+</div>
 ```
 ## 2.属性
-组件所涉及的属性有：广告位ID（asid）
+组件所涉及的属性有：广告位ID（asid）、要增加关闭按钮的层的ID(hide-layer-id)
 - 广告位ID（asid）
 	- 是否必填：是
-
+- 要增加关闭按钮的层的ID(hide-layer-id)
+    - 是否必填：否
 
