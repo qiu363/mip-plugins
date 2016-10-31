@@ -11,6 +11,32 @@ define('mip-ck-ad', ['require', 'customElement', 'zepto'], function (require) {
     var $tags = $('#tags');
     var cateid = $tags.data('cateid');
 
+    // 加载js文件
+    var loadJSFile = function (url, callback) {
+
+        // Adding the script tag to the head as suggested before
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = url;
+
+        // Then bind the event to the callback function.
+        // There are several events for cross browser compatibility.
+        script.onreadystatechange = callback;
+        script.onload = callback;
+
+        // Fire the loading
+        head.appendChild(script);
+    };
+    // load btm baidu ad
+    var loadBdAd = function () {
+        window.cpro_psid = 'u2422282';
+        window.cpro_psdata = {
+            staticDomain: 'su.bdimg.com'
+        };
+        loadJSFile('https://su.bdimg.com/static/dspui/js/umf.js');
+    };
+
     // 初始化直投广告
     var init = function (opt) {
         opt = opt || {};
@@ -51,10 +77,8 @@ define('mip-ck-ad', ['require', 'customElement', 'zepto'], function (require) {
                         switch (+k) {
                             case 52:
                                 var $body = $('body');
-                                element.html('<mip-ad layout="container"'
-                                    + 'cpro_psid="u2422282" type="ad-qwang" cpro_psheight="120">'
-                                    + '</mip-ad>');
-                                $body.css('padding-bottom', '120px !important;');
+                                loadBdAd();
+                                $body.css('padding-bottom', '130px !important;');
                                 break;
                         }
                     }
