@@ -3,6 +3,7 @@ define('mip-ck-ad', ['require', 'customElement', 'zepto'], function (require) {
     var $ = require('zepto');
 
     var customElem = require('customElement').create();
+    var $head = $('head');
 
     // 直投广告请求url
     var ajaxurl = 'https://s.cnkang.com/ad/showcodejsonp';
@@ -18,6 +19,8 @@ define('mip-ck-ad', ['require', 'customElement', 'zepto'], function (require) {
         var posId = [opt.posId] || [1];
         var cateId = opt.cateId || '';
         var element = opt.element;
+        var bdStyle = opt.bdStyle;
+        var ckStyle = opt.ckStyle;
 
         // 接口参数值
         var query = {
@@ -46,20 +49,24 @@ define('mip-ck-ad', ['require', 'customElement', 'zepto'], function (require) {
                                 element.html(v);
                                 break;
                         }
+                        ckStyle && $head.append('<style type="text/css">'
+                            + ckStyle
+                            + '</style>');
                     }
                     else {
                         switch (+k) {
                             case 52:
-                                var $body = $('body');
                                 element.html('<div class="ck-ad-52">'
                                     + '<span class="btn-ck-ad-52"'
                                     + 'on="tap:ck-ad-52.close">关闭</span>'
                                     + '</div><mip-ad layout="container"'
                                     + 'cpro_psid="u2422282" type="ad-qwang" cpro_psheight="120">'
                                     + '</mip-ad>');
-                                $body.css('padding-bottom', '85px !important;');
                                 break;
                         }
+                        bdStyle && $head.append('<style type="text/css">'
+                            + bdStyle
+                            + '</style>');
                     }
                 });
             }
@@ -72,12 +79,16 @@ define('mip-ck-ad', ['require', 'customElement', 'zepto'], function (require) {
         var posId = $element.attr('ck-ad-pid');
         var adCateId = $element.attr('ck-ad-cateid') || cateid;
         var lazy = $element.attr('lazy');
+        var bdStyle = $element.attr('bd-style');
+        var ckStyle = $element.attr('ck-style');
 
         // 广告初始化参数
         var opt = {
             posId: posId,
             cateId: $.trim(adCateId),
             lazy: lazy,
+            bdStyle: bdStyle,
+            ckStyle: ckStyle,
             element: $element
         };
         return opt;
