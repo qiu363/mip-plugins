@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html mip>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>MIP DEMO</title>
+    <link rel="stylesheet" type="text/css" href="/dist/css/mipmain.css">
+    <!-- 在standard html中添加 -->
+    <link rel="miphtml" href="页面h5 url">
+    <!-- 在mip html中添加 -->
+    <link rel="standardhtml" href="页面h5 url">
+<style mip-custom>
+</style>
+    <noscript>
+        <style mip-officialrelease>
+            body {
+                -webkit-animation:none;
+                -moz-animation:none;
+                -ms-animation:none;
+                animation:none
+            }
+        </style>
+    </noscript>
+</head>
+<body>
+
+<mip-hk-feed type="video"></mip-hk-feed>
+
+<script type="application/json" id="J_list_tpl">
+    <#obj.forEach(function(a, b){#>
+        <#if (a.type == 'text' || (a.data.img.length == 0 && a.type != 'video')) {#>
+        <a target="_blank" class="news-list-link" href="/detail/news/rec/<#=encodeURIComponent(a.data.url)#>{%if $channle == 'fengchao'%}?source=fengchao&from={%$from%}{%/if%}">
+            <h6><#=a.data.title#></h6>
+            <p><#=a.data.provider#></p>
+        </a>
+        <#} else if (a.type == 'article') {#>
+        <a target="_blank" class="news-list-link news-list-l-one-i" href="/detail/news/rec/<#=encodeURIComponent(a.data.url)#>{%if $channle == 'fengchao'%}?source=fengchao&from={%$from%}{%/if%}">
+            <h6><#=a.data.title#></h6>
+            <p><#=a.data.provider#></p>
+            <mip-img class="news-list-l-o-i" src="<#=a.data.img[0]#>"></mip-img>
+        </a>
+        <#} else if (a.type == 'image-list') {#>
+        <a target="_blank" class="news-list-link news-list-l-one-i" href="/detail/news/rec/<#=encodeURIComponent(a.data.url)#>{%if $channle == 'fengchao'%}?source=fengchao&from={%$from%}{%/if%}">
+            <h6><#=a.data.title#></h6>
+            <p><#=a.data.provider#></p>
+            <mip-img class="news-list-l-o-i" src="<#=a.img[0]['small']#>"></mip-img>
+        </a>
+        <#} else if (a.type == 'video') {#>
+        <a target="_blank" class="news-list-link news-list-l-one-i" href="/detail/news/rec/<#=encodeURIComponent(a.data.url)#>{%if $channle == 'fengchao'%}?source=fengchao&from={%$from%}{%/if%}">
+            <h6><#=a.data.title#></h6>
+            <p><#=a.data.provider#></p>
+            <mip-img class="news-list-l-o-i" src="<#=a.data.img[0]['small']#>"></mip-img>
+        </a>
+        <#}#>
+    <#});#>
+</script>
+
+<script src="/dist/mipmain.js"></script>
+<script src="/dist/extensions/mip-hk-cl/0.1/mip-hk-cl.js"></script>
+</body>
+</html>
